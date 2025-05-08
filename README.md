@@ -1,120 +1,110 @@
 # NoirHack25 – zkExpense Splitter
 
-**zkExpense Splitter** is a zero-knowledge-powered expense sharing tool that allows groups of friends to split expenses **without revealing individual contribution amounts**. By leveraging Noir, users can prove they paid their fair share — without disclosing sensitive payment details.
+**zkExpense Splitter** is a privacy-first tool that helps groups split expenses without revealing how much each person paid. Using zero-knowledge proofs via Noir, people can prove they contributed fairly — without exposing sensitive financial details.
 
-## 🧩 Problem Statement
+## Problem We're Tackling
 
-Most expense splitting tools (e.g., Splitwise) require users to reveal the full breakdown of who paid what. This creates **privacy risks**, especially when expenses involve sensitive contexts like donations, political causes, or private group spending.
+Most expense-splitting apps (like Splitwise) make you show who paid what. In some situations — like anonymous donations or private group spending — this can be a privacy concern.
 
-## ✅ Our Solution
+We wanted to solve that.
 
-zkExpense Splitter introduces a **privacy-preserving expense verification system**:
-- Users submit their share as encrypted inputs.
-- Noir verifies off-chain that the expense was split correctly.
-- The result is a **valid zero-knowledge proof**, confirming fairness without revealing raw numbers.
+## Our Approach
 
-This is especially powerful for:
-- Anonymous crowdfunding
-- Private organization spending
-- Family or group budgeting without micro-surveillance
+zkExpense Splitter lets users:
+- Submit encrypted inputs for what they contributed
+- Generate a zero-knowledge proof using Noir
+- Prove that the split was fair, without revealing any amounts
 
-## 🛠️ Tech Stack
+This approach can work well for things like:
+- Private fundraising
+- Organization budget tracking
+- Friends or family who want to keep things fair without micromanaging
 
-| Component | Description |
-|----------|-------------|
-| **Noir** | zk circuit logic for validating fair expense splitting |
-| **Express.js Backend** | Serves API routes for generating proofs and handling inputs |
-| **Shell script (`prover.sh`)** | Automates proving process using Noir |
-| **Frontend (basic)** | (Optional) Interface for submitting inputs and viewing proofs |
-| **zk-expense-hardhat** | (Optional) Smart contract + deployment scripts (future expansion) |
+## Tech Stack
 
-## 🔐 Noir Circuit Details
+| Component | Purpose |
+|----------|---------|
+| **Noir** | Handles the core zk logic to verify fair expense splits |
+| **Express.js backend** | Provides endpoints to update input files and trigger proving |
+| **Shell script (`prover.sh`)** | Runs Noir proof generation from the backend |
+| **Frontend (planned)** | Interface for submitting data (to be added) |
+| **zk-expense-hardhat** | Scaffold for optional contract deployment in the future |
 
-Located under `expense_splitter/Noir/`, our Noir circuit:
-- Accepts encrypted expense shares
-- Validates that total contributions match expected total
-- Outputs a proof that can be verified without revealing private values
+## Noir Circuit
 
-Files:
-- `main.nr`: Entry point for the circuit
-- `lib.nr`: Contains constraint logic for summing and checking fairness
-- `Prover.toml`: Auto-generated inputs for the prover
+You’ll find the circuit in `expense_splitter/Noir/`. It checks that all encrypted shares add up to the total and produces a proof of correctness.
 
-## 🚀 How to Run Locally
+Files include:
+- `main.nr`: The main entry point
+- `lib.nr`: Logic for summing and constraint checks
+- `Prover.toml`: Input values used during proving
 
-1. **Install dependencies**:
-   ```bash
-   cd expense_splitter/backend
-   npm install
-   
-2. **Start the backend server**:
-   ```bash
-   node server.js
+## How to Run Locally
 
-3. **Update Prover Input**:
-   Send a `POST` request to the `/write-toml` endpoint with a valid TOML body.
-   You can use tools like [Postman](https://www.postman.com/) or `curl`:
-   ```bash
-   curl -X POST http://localhost:5050/write-toml --data-binary @Prover.toml
-   ```
+```bash
+# 1. Install backend dependencies
+cd expense_splitter/backend
+npm install
 
-4. **Run the Prover**:
-   Access the `/run-prover` endpoint to generate a proof using your Noir circuit:
-   ```
-   http://localhost:5050/run-prover
-   ```
+# 2. Start the server
+node server.js
 
-> _Note: You must have `nargo` and the Noir CLI tools installed locally to generate proofs._
+# 3. Update Prover Input
+# Send a POST request with your TOML body to:
+# http://localhost:5050/write-toml
+# Example with curl:
+curl -X POST http://localhost:5050/write-toml --data-binary @Prover.toml
 
-## 📂 Folder Structure
+# 4. Trigger the prover
+# Visit the following URL in your browser or via curl:
+http://localhost:5050/run-prover
+```
 
-```text
+> Note: You’ll need `nargo` and Noir CLI tools installed to generate proofs locally.
+
+## Folder Structure
+
+```
 NoirHack25-main/
 ├── expense_splitter/
-│   ├── backend/        # Express.js server and API
-│   ├── frontend/       # Optional UI (basic)
-│   ├── Noir/           # Noir circuit + Prover config
-│   └── prover.sh       # ZK proof script
-├── zk-expense-hardhat/ # Optional smart contract scaffold
+│   ├── backend/        # API logic and Noir integration
+│   ├── frontend/       # UI (to be added)
+│   ├── Noir/           # Noir circuit and config
+│   └── prover.sh       # Script to run proof generation
+├── zk-expense-hardhat/ # Optional smart contract setup
 └── README.md
 ```
 
-## 📹 Demo & Submission Info
+## Demo & Submission Details
 
 - **Video Demo**: [Coming Soon]
-- **Live Demo**: [If hosted, insert link here]
-- **Slides**: [Link to presentation]
-- **Submission for**: 
-  - 🥇 Aztec – General Track
-  - ⚙️ Technical Excellence
-  - 🚀 Follow-up Grant Potential
-  - 🌍 Entrepreneurship Prize (Best Real-World App)
+- **Live Demo**: [If deployed, link it here]
+- **Slides**: [Presentation link goes here]
+- **Prize Tracks**:  
+  - Aztec – General  
+  - Technical Excellence  
+  - Follow-up Grant  
+  - Entrepreneurship Award
 
-## 🧠 Libraries & Tools Used
+## Libraries & Tools
 
-```text
-- Noir CLI + Nargo
-- Express.js
-- Shell scripting for automation
-- (Optional) Hardhat & Solidity (zk-expense-hardhat for expansion)
-```
+- Noir + Nargo
+- Node.js / Express
+- Bash scripting
+- (Optional) Hardhat + Solidity (for future on-chain verification)
 
-## 🙌 Challenges Overcome
+## Challenges We Faced
 
-```text
-- Dynamically generating valid TOML input and wiring backend logic to Noir prover
-- Ensuring circuit constraints work with realistic inputs
-- Timeboxing for proof generation during development
-```
+- Connecting backend logic to dynamic TOML file generation
+- Structuring constraints in Noir to validate fairness
+- Keeping proof generation time manageable under hackathon pressure
 
-## 📝 Future Work
+## What’s Next
 
-```text
-- Add frontend UI for user interaction
-- Deploy smart contract verifier (zk-expense-hardhat)
-- Enable multi-user flows with persistent identity (zkID or Semaphore)
-```
+- Add a full frontend for submitting and verifying proofs
+- Deploy a verifier smart contract for optional on-chain proof validation
+- Support multi-user identity with tools like zkID or Semaphore
 
 ---
 
-Made with ❤️ for **NoirHack25**
+Made with ❤️ for NoirHack25
