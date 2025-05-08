@@ -41,26 +41,37 @@ Files include:
 
 ## How to Run Locally
 
-```bash
-# 1. Install backend dependencies
-cd expense_splitter/backend
-npm install
+1. **Install backend dependencies**
+   ```bash
+   cd expense_splitter/backend
+   npm install
+   ```
 
-# 2. Start the server
-node server.js
+2. **Start the server**
+   ```bash
+   node server.js
+   ```
 
-# 3. Update Prover Input
-# Send a POST request with your TOML body to:
-# http://localhost:5050/write-toml
-# Example with curl:
-curl -X POST http://localhost:5050/write-toml --data-binary @Prover.toml
+3. **Update Prover Input**
 
-# 4. Trigger the prover
-# Visit the following URL in your browser or via curl:
-http://localhost:5050/run-prover
-```
+   Send a `POST` request with your TOML body to:
+   ```
+   http://localhost:5050/write-toml
+   ```
 
-> Note: You’ll need `nargo` and Noir CLI tools installed to generate proofs locally.
+   Example using curl:
+   ```bash
+   curl -X POST http://localhost:5050/write-toml --data-binary @Prover.toml
+   ```
+
+4. **Trigger the prover**
+
+   Visit the following URL in your browser or via curl:
+   ```
+   http://localhost:5050/run-prover
+   ```
+
+> **Note**: You’ll need `nargo` and Noir CLI tools installed to generate proofs locally.
 
 ## Folder Structure
 
