@@ -1,0 +1,7 @@
+[package]
+name = "expense_splitter"
+type = "bin"
+authors = ["Efe Yılmaz, Ömer Balaban, Sudenur Bilgin"]
+documentation = ["Özgür Matiloğlu"]
+
+[dependencies]

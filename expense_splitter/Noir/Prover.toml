@@ -1,0 +1,5 @@
+[input]
+  paid = 3
+  expected_share = 3
+  total = 9
+  
