@@ -1,5 +1,13 @@
 # NoirHack25 – zkExpense Splitter
 
+### Team - MEF Blockchain
+
+- Özgür Matiloğlu  
+- Ömer Faruk Balaban  
+- Efe Yılmaz  
+- Sudenur Bilgin
+
+
 **zkExpense Splitter** is a privacy-focused tool that lets people split expenses fairly without revealing how much each person paid. By using zero-knowledge proofs through Noir, it proves fairness — but keeps personal amounts and identities hidden.
 
 ## Problem We're Tackling
@@ -61,6 +69,7 @@ Files:
    ```
 
 3. **Use the App**
+
    Go to:
    ```
    http://localhost:3000
