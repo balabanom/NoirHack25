@@ -68,7 +68,7 @@ Files:
   Enter 3 payment values and the total expense, then click “Run ZK Proof” to generate and verify the proof.
 
 4. **Noir Prover**
-   The backend automatically generates Prover.toml, runs the Noir circuit via prover.sh, and returns proof status to the frontend.  
+   The backend automatically generates `Prover.toml`, runs the Noir circuit via `prover.sh`, and returns the proof status to the frontend.
 
 > You’ll need [Noir CLI tools](https://noir-lang.org/docs/getting-started/installation) installed locally (`nargo`) to generate the proof via `prover.sh`.
 
