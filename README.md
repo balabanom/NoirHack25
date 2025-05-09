@@ -87,7 +87,7 @@ NoirHack25-main/
 └── README.md
 ```
 
-### Team - MEF Blockchain
+## Team - MEF Blockchain
 
 - Özgür Matiloğlu  
 - Ömer Faruk Balaban  
